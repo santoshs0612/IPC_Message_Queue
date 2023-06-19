@@ -56,6 +56,13 @@ int main(int argc,char **argv){
         exit(1);
     }
     // send the msq to msgq provided
-    
+   if(mq_send(recvr_msgq_fd,buffer,strlen(buffer)+1,0)==-1){
+       perror("Client: Not able to send message to server");
+       exit(1);
+   }
+
+   //close the mq
+   mq_close(recvr_msgq_fd);
+   return 0;
 }
 
