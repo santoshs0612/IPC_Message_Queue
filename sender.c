@@ -35,6 +35,27 @@
 /*  main function  */
 
 int main(int argc,char **argv){
-    char buffer[MSG_BUFFER_SIZE]
+    char buffer[MSG_BUFFER_SIZE];
+    int recvr_msgq_fd=0;
+    /* argument check */
+    if(argv<=1){
+        printf("Provide a recepient msgQ name : format </msgq-name>\n");
+        return 0;
+    }
+    // Initialize the buffer
+    memset(buffer,0,MSG_BUFFER_SIZE);
+    printf("Enter the msg to you want to send to receiver %s", argv[1]);
+    // Enter the msg
+    scanf("%s",buffer);
+    
+    // opening the msgQ in write mode
+
+    if((recvr_msgq_fd = mq_open(argv[1],O_WRONLY | O_CREAT,0,0))==1)
+    {
+        printf("Client : Msgq Not able to open , errno =%d",errno);
+        exit(1);
+    }
+    // send the msq to msgq provided
+    
 }
 
