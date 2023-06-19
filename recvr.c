@@ -37,7 +37,7 @@
 /* Main program */
 
 int main(int argc,char **argv){
-    fd_set_readfds;
+    fd_set readfds;
     char buffer[MSG_BUFFER_SIZE];
     int msgq_fd =0;
 
@@ -49,9 +49,9 @@ int main(int argc,char **argv){
 
     /* Set the MsqQ Attributes */
     struct mq_attr attr;
-    attr.mq_flag = 0;
-    attr.mq-maxmsg= MAX_MESSAGES;
-    attr.mq_msgaize = MAX_MSG_SIZE;
+    attr.mq_flags = 0;
+    attr.mq_maxmsg= MAX_MESSAGES;
+    attr.mq_msgsize = MAX_MSG_SIZE;
     attr.mq_curmsgs =0;
 
 
@@ -74,7 +74,7 @@ int main(int argc,char **argv){
                 printf("Mq_receive error,errno= %d\n",errno);
                 exit(1);
             }
-            printf("Msg recieved from Queue= %s", buffer);
+            printf("Msg recieved from Queue= %s\n", buffer);
         }
     }
 }
